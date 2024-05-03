@@ -13,7 +13,7 @@
 
 rest_command:
   update_traccar:
-    url: 'http://<traccar_server_ip>:<traccar_server_ip>'
+    url: 'http://<traccar_server_ip>:<traccar_server_port>'
     method: GET
     payload: '?id={{id}}&lat={{lat}}&lon={{lon}}&altitude={{alt}}&batt={{batt}}&speed={{speed}}'
 
