@@ -45,7 +45,7 @@ Follow these steps to install and configure the integration:
 
 ### Step 3: Configure Traccar Server IP
 1. Open the `traccar_integration.yaml` file with a text editor.
-2. Replace the `traccar_server_ip` and `traccar_server_ip` value with the IP address and Port of your Traccar server instance.
+2. Replace the `traccar_server_ip` and `traccar_server_port` value with the IP address and Port (default for the used protocol is **5055**) of your Traccar server instance.
 
 ### Step 4: Add Device IDs
 1. In the `traccar_integration.yaml` file, add the IDs of the devices you want to track under the `device_tracker.<device_tracker_1>` keys.
