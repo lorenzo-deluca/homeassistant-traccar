@@ -38,17 +38,17 @@ Follow these steps to install and configure the integration:
 ![traccar_ha_configuration](images/traccar_ha_configuration.png)
 
 ### Step 2: Import Package YAML File
-1. Download the `traccar_integration.yaml` file from this repository.
+1. Download the `traccar_positioning.yaml` file from this repository.
 2. Place the file into the `packages` folder of your Home Assistant configuration.
 
    If the `packages` folder does not exist, you will need to create it following the [official documentation](https://www.home-assistant.io/docs/configuration/packages/).
 
 ### Step 3: Configure Traccar Server IP
-1. Open the `traccar_integration.yaml` file with a text editor.
+1. Open the `traccar_positioning.yaml` file with a text editor.
 2. Replace the `traccar_server_ip` and `traccar_server_port` value with the IP address and Port (default for the used protocol is **5055**) of your Traccar server instance.
 
 ### Step 4: Add Device IDs
-1. In the `traccar_integration.yaml` file, add the IDs of the devices you want to track under the `device_tracker.<device_tracker_1>` keys.
+1. In the `traccar_positioning.yaml` file, add the IDs of the devices you want to track under the `device_tracker.<device_tracker_1>` keys.
 2. Ensure the IDs match exactly those configured in Traccar.
 
 ## Usage
