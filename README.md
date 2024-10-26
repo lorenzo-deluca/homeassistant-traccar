@@ -1,11 +1,13 @@
 # Home Assistant Traccar Device Tracker Integration
 ![Version](https://img.shields.io/github/v/release/lorenzo-deluca/homeassistant-traccar)
 ![Downloads](https://img.shields.io/github/downloads/lorenzo-deluca/homeassistant-traccar/total)
+[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/lorenzo-deluca)
 [![buy me a coffee](https://img.shields.io/badge/support-buymeacoffee-222222.svg?style=flat-square)](https://www.buymeacoffee.com/lorenzodeluca)
 
 This package enables the integration of Home Assistant `device_tracker` entities into the Traccar GPS tracking system by synchronizing device IDs across both platforms.
-If you like this project you can support me with :coffee: or simply put a :star: to this repository :blush:
+If you like this project you can support me with :coffee: , with **GitHub Sponsor** or simply put a :star: to this repository :blush:
 
+[![](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/lorenzo-deluca)
 <a href="https://www.buymeacoffee.com/lorenzodeluca" target="_blank">
   <img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" width="150px">
 </a>
