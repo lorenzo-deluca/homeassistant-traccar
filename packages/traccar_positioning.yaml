@@ -21,11 +21,10 @@ automation:
   - id: 'position_tracking_update_traccar_position'
     alias: Position - Update Traccar Position
     description: ''
-    trigger:
-    - platform: state
-      entity_id:
-      - device_tracker.<device_tracker_1>
-    condition:
+    triggers:
+        - entity_id: 
+            - device_tracker.<device_tracker_1>
+    conditions:
     - condition: template
       value_template: '{{ trigger.from_state.state not in [''unknown'', ''unavailable'']
         }}'
