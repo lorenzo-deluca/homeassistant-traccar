@@ -3,11 +3,11 @@
 #################################################################
 # Lorenzo De Luca (me@lorenzodeluca.dev)
 # GitHub: https://github.com/lorenzo-deluca/homeassistant-traccar
-# Version: 0.1
+# Version: v2024.11.33
 # * This program is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
-# 
+#
 # GNU Affero General Public License v3.0
 #################################################################
 
@@ -23,14 +23,13 @@ automation:
     description: ''
     triggers:
       - trigger: state
-        entity_id: device_tracker.<device_tracker_1>
+        entity_id:
+          - device_tracker.<device_tracker_1>
     conditions:
       - condition: template
-        value_template: '{{ trigger.from_state.state not in [''unknown'', ''unavailable'']
-          }}'
+        value_template: '{{ trigger.from_state.state not in [''unknown'', ''unavailable''] }}'
       - condition: template
-        value_template: '{{ trigger.to_state.state not in [''unknown'', ''unavailable'']
-          }}'
+        value_template: '{{ trigger.to_state.state not in [''unknown'', ''unavailable''] }}'
     actions:
       - action: rest_command.update_traccar
         continue_on_error: true
@@ -53,5 +52,5 @@ automation:
                 {% endif %}
               {% endif %}
           speed: '0'
-      mode: parallel
-      max: 10
+    mode: parallel
+    max: 10
