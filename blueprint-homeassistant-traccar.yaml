@@ -1,0 +1,62 @@
+blueprint:
+  name: Traccar Positioning
+  description: Update Device Tracker positioning from Home Assistant to Traccar Server
+  domain: automation
+  input:
+    traccar_server_ip:
+      name: Traccar Server Address
+      description: Insert Traccar IP Server Address or DNS Name
+      default: '192.168.1.100'
+    traccar_server_port:
+      name: Traccar Server Port
+      description: Insert Traccar Server Port
+      default: '8082'
+    device_trackers:
+      name: Tracking Devices
+      description: Select Device Tracker Devices
+      selector:
+        target:
+          entity:
+            domain: device_tracker
+
+rest_command:
+  update_traccar:
+    url: 'http://!input traccar_server_ip:!input traccar_server_port'
+    method: GET
+    payload: '?id={{id}}&lat={{lat}}&lon={{lon}}&altitude={{alt}}&batt={{batt}}&speed={{speed}}'
+
+trigger:
+  - platform: state
+    entity_id: !input 'device_trackers'
+
+condition:
+  - condition: template
+    value_template: '{{ trigger.from_state.state not in [''unknown'', ''unavailable''] }}'
+  - condition: template
+    value_template: '{{ trigger.to_state.state not in [''unknown'', ''unavailable''] }}'
+
+action:
+  - service: rest_command.update_traccar
+    continue_on_error: true
+    data:
+      id: '{{ trigger.entity_id }}'
+      lat: '{{ state_attr(trigger.entity_id, ''latitude'')  | float(0) }}'
+      lon: '{{ state_attr(trigger.entity_id, ''longitude'') | float(0) }}'
+      alt: '{{ state_attr(trigger.entity_id, ''altitude'') | float(0) }}'
+      batt: >
+        {% set device_tracker = trigger.entity_id %}
+        {% set battery_level = state_attr(device_tracker, 'battery_level') %}
+        {% if battery_level is not none %} 
+          {{ battery_level | float(0) }}
+        {% else %}
+          {% set sensor_entities  = states.sensor | selectattr('entity_id', 'match', '.*' ~ device_tracker.split('.')[1] ~ '_battery_level') | map(attribute='entity_id') | list %}
+          {% if sensor_entities is not none and sensor_entities | length > 0 %}
+            {{ states(sensor_entities[0]) | float(0) }}
+          {% else %}
+            0
+          {% endif %}
+        {% endif %}
+      speed: '0'
+
+mode: parallel
+max: 10
