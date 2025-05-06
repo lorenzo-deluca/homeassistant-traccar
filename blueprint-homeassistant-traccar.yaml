@@ -3,18 +3,10 @@ blueprint:
   description: Update Device Tracker positioning from Home Assistant to Traccar Server
   domain: automation
   input:
-    traccar_server_ip:
-      name: Traccar Server Address
-      description: Insert Traccar IP Server Address or DNS Name
-      default: '192.168.1.100'
-    traccar_server_protocol:
-      name: Traccar Server Protocol
-      description: Insert Traccar Server Protocol (http or https)
-      default: 'http'
-    traccar_server_port:
-      name: Traccar Server Port
-      description: Insert Traccar Server Port
-      default: '8082'
+    traccar_url:
+      name: Traccar Server URL
+      description: Insert Traccar IP Server Address or DNS Name with protocol and port
+      default: 'http://192.168.1.100:5002'
     device_trackers:
       name: Tracking Devices
       description: Select Device Tracker Devices
