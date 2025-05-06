@@ -12,8 +12,8 @@ blueprint:
       description: Select Device Tracker Devices
       selector:
         target:
+          multiple: true
           entity:
-            multiple: true
             domain: device_tracker
 
 trigger:
