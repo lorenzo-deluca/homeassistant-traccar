@@ -37,7 +37,7 @@ action:
   - service: rest_command.update_traccar
     continue_on_error: true
     data:
-      traccar_url: '{{!input traccar_server_protocol}}://{{!input traccar_server_ip}}:{{!input traccar_server_port}}'
+      traccar_url: !input 'traccar_server_ip'
       id: '{{ trigger.entity_id }}'
       lat: '{{ state_attr(trigger.entity_id, ''latitude'')  | float(0) }}'
       lon: '{{ state_attr(trigger.entity_id, ''longitude'') | float(0) }}'
