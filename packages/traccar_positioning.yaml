@@ -3,7 +3,7 @@
 #################################################################
 # Lorenzo De Luca (me@lorenzodeluca.dev)
 # GitHub: https://github.com/lorenzo-deluca/homeassistant-traccar
-# Version: v2024.12.1
+# Version: v2025.5.1
 # * This program is distributed in the hope that it will be useful, but WITHOUT ANY
 # WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE. See the GNU General Public License for more details.
@@ -13,44 +13,6 @@
 
 rest_command:
   update_traccar:
-    url: 'http://<traccar_server_ip>:<traccar_server_port>'
+    url: '{{traccar_url}}'
     method: GET
     payload: '?id={{id}}&lat={{lat}}&lon={{lon}}&altitude={{alt}}&batt={{batt}}&speed={{speed}}'
-
-automation:
-  - id: 'position_tracking_update_traccar_position'
-    alias: Position - Update Traccar Position
-    description: ''
-    triggers:
-      - trigger: state
-        entity_id:
-          - device_tracker.<device_tracker_1>
-    conditions:
-      - condition: template
-        value_template: '{{ trigger.from_state.state not in [''unknown'', ''unavailable''] }}'
-      - condition: template
-        value_template: '{{ trigger.to_state.state not in [''unknown'', ''unavailable''] }}'
-    actions:
-      - action: rest_command.update_traccar
-        continue_on_error: true
-        data:
-          id: '{{ trigger.entity_id }}'
-          lat: '{{ state_attr(trigger.entity_id, ''latitude'')  | float(0) }}'
-          lon: '{{ state_attr(trigger.entity_id, ''longitude'') | float(0) }}'
-          alt: '{{ state_attr(trigger.entity_id, ''altitude'') | float(0) }}'
-          batt: >
-            {% set device_tracker = trigger.entity_id %}
-              {% set battery_level = state_attr(device_tracker, 'battery_level') %}
-              {% if battery_level is not none %} 
-                {{ battery_level | float(0) }}
-              {% else %}
-                {% set sensor_entities  = states.sensor | selectattr('entity_id', 'match', '.*' ~ device_tracker.split('.')[1] ~ '_battery_level') | map(attribute='entity_id') | list %}
-                {% if sensor_entities is not none and sensor_entities | length > 0 %}
-                  {{ states(sensor_entities[0]) | float(0) }}
-                {% else %}
-                  0
-                {% endif %}
-              {% endif %}
-          speed: '0'
-    mode: parallel
-    max: 10
