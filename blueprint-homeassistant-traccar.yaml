@@ -1,5 +1,5 @@
 blueprint:
-  name: Traccar Positioning
+  name: Traccar Positioning Update (v2025.5.1)
   description: Update Device Tracker positioning from Home Assistant to Traccar Server
   domain: automation
   input:
