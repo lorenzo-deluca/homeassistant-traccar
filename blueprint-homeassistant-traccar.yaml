@@ -20,7 +20,6 @@ blueprint:
 trigger:
 - platform: state
   entity_id: !input device_trackers
-  attribute: all
 
 condition:
 - condition: template
