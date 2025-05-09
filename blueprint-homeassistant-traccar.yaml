@@ -7,13 +7,14 @@ blueprint:
       name: Traccar Server URL
       description: Insert Traccar IP Server Address or DNS Name with protocol and
         port (example http://ip:port)
-      default: http://192.168.1.100:5002
+      default: http://192.168.1.1:5050
     device_trackers:
       name: Tracking Devices
       description: Select Device Tracker Devices
       selector:
         entity:
-          domain: device_tracker
+          domain:
+          - device_tracker
           multiple: true
 
 trigger:
@@ -32,7 +33,7 @@ action:
 - service: rest_command.update_traccar
   continue_on_error: true
   data:
-    url: !input traccar_url
+    traccar_url: !input traccar_url
     id: '{{ trigger.entity_id }}'
     lat: '{{ state_attr(trigger.entity_id, ''latitude'')  | float(0) }}'
     lon: '{{ state_attr(trigger.entity_id, ''longitude'') | float(0) }}'
