@@ -47,4 +47,4 @@ action:
       \ {% endif %}\n{% endif %}\n"
     speed: '0'
 mode: parallel
-max: 10
+max: 50
